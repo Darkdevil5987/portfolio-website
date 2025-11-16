@@ -8,15 +8,56 @@
     const yearEl = document.getElementById('year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-    // ---------- Theme toggle (light class) ----------
-    const toggle = document.getElementById('themeToggle');
-    const sun = toggle ? toggle.querySelector('.icon-sun') : null;
-    const moon = toggle ? toggle.querySelector('.icon-moon') : null;
+   // --- Theme toggle: restore light/dark functionality ---
+(function () {
+  const root = document.documentElement;
+  const toggle = document.getElementById('themeToggle');
 
-    // restore saved theme or use system preference
-    const saved = localStorage.getItem('theme'); // 'light' or 'dark' or null
-    if (saved === 'light') root.classList.add('light');
-    else if (saved === 'dark') root.classList.remove('light'); // default is dark
+  // initialize from saved preference or system
+  const saved = localStorage.getItem('theme'); // "light" or "dark"
+  if (saved === 'light') root.classList.add('light');
+  else if (saved === 'dark') root.classList.remove('light');
+  else {
+    // no saved pref -> use system pref
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+      root.classList.add('light');
+    }
+  }
+
+  function refreshIcons() {
+    if (!toggle) return;
+    const sun = toggle.querySelector('.icon-sun');
+    const moon = toggle.querySelector('.icon-moon');
+    if (root.classList.contains('light')) {
+      if (sun) sun.style.display = 'none';
+      if (moon) moon.style.display = 'inline-block';
+    } else {
+      if (sun) sun.style.display = 'inline-block';
+      if (moon) moon.style.display = 'none';
+    }
+  }
+  refreshIcons();
+
+  if (toggle) {
+    toggle.addEventListener('click', () => {
+      const isLight = root.classList.toggle('light');
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      refreshIcons();
+    });
+  }
+
+  // Optional: respond to system preference changes if no manual choice
+  if (window.matchMedia) {
+    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
+      if (!localStorage.getItem('theme')) {
+        if (e.matches) root.classList.add('light');
+        else root.classList.remove('light');
+        refreshIcons();
+      }
+    });
+  }
+})();
+
 
     // if no saved pref, follow system
     if (!saved && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
@@ -140,4 +181,5 @@
     init();
   }
 })();
+
 
