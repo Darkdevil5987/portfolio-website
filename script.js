@@ -112,27 +112,7 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // ---------- Cursor glow ----------
-    const glow = document.getElementById('cursor-glow');
-    if (glow) {
-      // follow mouse
-      document.addEventListener('mousemove', function (e) {
-        // use client coordinates so viewport scroll doesn't affect placement
-        glow.style.left = e.clientX + 'px';
-        glow.style.top = e.clientY + 'px';
-      });
 
-      // grow/shrink on focusable/clickable elements
-      function addGlowHandlers(el) {
-        el.addEventListener('mouseenter', () => {
-          glow.style.width = '45px';
-          glow.style.height = '45px';
-        });
-        el.addEventListener('mouseleave', () => {
-          glow.style.width = '26px';
-          glow.style.height = '26px';
-        });
-      }
 
       // Attach handlers to current clickable items
       document.querySelectorAll('a, button, .btn').forEach(addGlowHandlers);
@@ -160,3 +140,4 @@
     init();
   }
 })();
+
