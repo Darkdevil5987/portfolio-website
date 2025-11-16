@@ -140,11 +140,6 @@ html, body {
   cursor:pointer; box-shadow: 0 10px 30px rgba(2,6,23,0.35);
 }
 
-/* hide default cursor only on fine-pointer devices (desktop) for accessibility */
-@media (hover: hover) and (pointer: fine) {
-  body, a, button { cursor: none !important; }
-}
-
 /* ---------- Responsive ---------- */
 @media (max-width: 880px) {
   .hero { grid-template-columns: 1fr; padding:26px 0; }
@@ -165,4 +160,5 @@ html, body {
 
 /* small utilities */
 .hidden { display:none !important; }
+
 
