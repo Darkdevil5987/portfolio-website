@@ -1,5 +1,3 @@
-// script.js - consolidated and production-ready
-
 (function () {
   function init() {
     const root = document.documentElement;
@@ -8,56 +6,15 @@
     const yearEl = document.getElementById('year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-   // --- Theme toggle: restore light/dark functionality ---
-(function () {
-  const root = document.documentElement;
-  const toggle = document.getElementById('themeToggle');
+    // ---------- Theme toggle (light class) ----------
+    const toggle = document.getElementById('themeToggle');
+    const sun = toggle ? toggle.querySelector('.icon-sun') : null;
+    const moon = toggle ? toggle.querySelector('.icon-moon') : null;
 
-  // initialize from saved preference or system
-  const saved = localStorage.getItem('theme'); // "light" or "dark"
-  if (saved === 'light') root.classList.add('light');
-  else if (saved === 'dark') root.classList.remove('light');
-  else {
-    // no saved pref -> use system pref
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-      root.classList.add('light');
-    }
-  }
-
-  function refreshIcons() {
-    if (!toggle) return;
-    const sun = toggle.querySelector('.icon-sun');
-    const moon = toggle.querySelector('.icon-moon');
-    if (root.classList.contains('light')) {
-      if (sun) sun.style.display = 'none';
-      if (moon) moon.style.display = 'inline-block';
-    } else {
-      if (sun) sun.style.display = 'inline-block';
-      if (moon) moon.style.display = 'none';
-    }
-  }
-  refreshIcons();
-
-  if (toggle) {
-    toggle.addEventListener('click', () => {
-      const isLight = root.classList.toggle('light');
-      localStorage.setItem('theme', isLight ? 'light' : 'dark');
-      refreshIcons();
-    });
-  }
-
-  // Optional: respond to system preference changes if no manual choice
-  if (window.matchMedia) {
-    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
-      if (!localStorage.getItem('theme')) {
-        if (e.matches) root.classList.add('light');
-        else root.classList.remove('light');
-        refreshIcons();
-      }
-    });
-  }
-})();
-
+    // restore saved theme or use system preference
+    const saved = localStorage.getItem('theme'); // 'light' or 'dark' or null
+    if (saved === 'light') root.classList.add('light');
+    else if (saved === 'dark') root.classList.remove('light'); // default is dark
 
     // if no saved pref, follow system
     if (!saved && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
@@ -99,7 +56,6 @@
     const menuBtn = document.getElementById('menuBtn');
     let mobileNav = document.getElementById('mobileNav');
     if (!mobileNav) {
-      // create if not present in HTML
       mobileNav = document.createElement('div');
       mobileNav.id = 'mobileNav';
       mobileNav.className = 'mobile-nav';
@@ -122,7 +78,6 @@
         else openMobileNav();
       });
 
-      // ensure nav resets when resizing to desktop
       window.addEventListener('resize', function () {
         if (window.innerWidth > 880) {
           if (mobileNav) mobileNav.style.display = 'none';
@@ -153,14 +108,6 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-
-
-      // Attach handlers to current clickable items
-      document.querySelectorAll('a, button, .btn').forEach(addGlowHandlers);
-
-      // If new elements may be added dynamically, you can use MutationObserver (optional)
-    }
-
     // ---------- Image fallback ----------
     const photo = document.getElementById('profilePhoto');
     if (photo) {
@@ -168,18 +115,11 @@
         photo.src = 'https://via.placeholder.com/400x400?text=Profile';
       });
     }
-
-    // ---------- Optional: any other init work ----------
-    // (scroll reveal code or other features can be initialized here)
-
   } // end init
 
-  // run init when DOM ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
     init();
   }
 })();
-
-
