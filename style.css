@@ -160,5 +160,25 @@ html, body {
 
 /* small utilities */
 .hidden { display:none !important; }
+/* --- LIGHT THEME OVERRIDE (add class "light" to <html>) --- */
+:root.light {
+  --bg: #ffffff;
+  --text: #111111;
+  --card: #f3f33f3; /* fallback card color */
+  --muted: #6b7280;
+  --glass: rgba(0,0,0,0.04);
+}
+
+/* Make sure body and cards use the variables */
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  transition: background 320ms ease, color 320ms ease;
+}
+.card, .about, .projects, .contact, .site-footer {
+  background: var(--card);
+  transition: background 320ms ease;
+}
+
 
 
