@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mohammed Sahail — Portfolio (single file)</title>
+
+  <!-- Optional font; site still works if blocked -->
+  <link href="style.CSS" rel="stylesheet">
+
+
+<!-- load your external JS (must be in the same folder) -->
+<script src="script.js"></script>
+</body>
+</html>
+
+  
+  <style>
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --accent:#7c3aed;
+      --muted:#9aa4b2;
+      --container:1100px;
+      --radius:14px;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, serif;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg), #071026);color:#e6eef8}
+    .container{max-width:var(--container);margin:0 auto;padding:28px}
+
+    .site-header{position:sticky;top:0;backdrop-filter:blur(6px);background:rgba(11,18,32,0.45);z-index:50}
+    .header-inner{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{font-weight:700;margin:0;font-size:1.15rem;color:white;padding:8px 0}
+    .nav{display:flex;gap:16px;align-items:center}
+    .nav a{color:var(--muted);text-decoration:none;font-weight:500}
+    .menu-btn{display:none;background:none;border:0;color:var(--muted);font-size:1.2rem;cursor:pointer}
+
+    .hero{display:grid;grid-template-columns:260px 1fr;gap:28px;align-items:center;padding:40px 0}
+    .photo-wrap{width:240px;height:240px;border-radius:20px;background:linear-gradient(135deg, rgba(124,58,237,0.12), rgba(14,165,233,0.06));display:flex;align-items:center;justify-content:center;box-shadow:0 6px 30px rgba(2,6,23,0.6);padding:12px}
+    .photo{width:100%;height:100%;object-fit:cover;border-radius:12px;border:6px solid rgba(255,255,255,0.03);animation:float 6s ease-in-out infinite;transform-origin:center}
+    @keyframes float{0%{transform:translateY(0) rotate(0.5deg)}50%{transform:translateY(-10px) rotate(-0.5deg)}100%{transform:translateY(0) rotate(0.5deg)}}
+
+    .hero-content .eyebrow{color:var(--muted);margin:0}
+    .fullname{font-size:2rem;margin:6px 0}
+    .tagline{color:var(--muted);margin:0 0 12px 0}
+    .lang-list ul{margin:6px 0 0 0;padding-left:18px;color:var(--muted)}
+
+    .about,.projects,.contact{margin-top:36px;padding:22px;background:rgba(255,255,255,0.02);border-radius:var(--radius)}
+    .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:18px}
+    .card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 6px 20px rgba(2,6,23,0.6);transition:transform 220ms}
+    .card:hover{transform:translateY(-6px)}
+    .card h4{margin:0 0 8px 0}
+    .card p{margin:0 0 10px 0;color:var(--muted)}
+    .meta{font-size:0.85rem;color:var(--muted)}
+    .btn{display:inline-block;margin-top:12px;padding:8px 12px;border-radius:10px;text-decoration:none;background:linear-gradient(90deg,var(--accent),#06b6d4);color:white;font-weight:600}
+
+    .contact-list{list-style:none;padding:0;margin:12px 0 0 0;color:var(--muted)}
+    .contact-list li{padding:8px 0}
+    .site-footer{padding:18px 0;text-align:center;color:var(--muted);opacity:0.9;margin-top:40px}
+
+    /* Responsive */
+    @media (max-width:880px){
+      .hero{grid-template-columns:1fr;gap:18px;padding:26px 0}
+      .photo-wrap{width:180px;height:180px;margin:0 auto}
+      .nav{display:none}
+      .menu-btn{display:block}
+    }
+
+    /* small utility for the test message */
+    .debug { color: #ffd966; font-size:0.9rem; margin-top:8px; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+  <div class="container header-inner">
+<!-- THEME TOGGLE (place this BEFORE your brand/title) -->
+<button id="themeToggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+  <span class="icon-sun">☀️</span>
+  <span class="icon-moon" style="display:none">🌙</span>
+</button>
+
+<div id="cursor-glow"></div>
+<body>
+  <div id="cursor-glow"></div>
+  <!-- rest of your content -->
+
+    <h1 class="brand">Mohammed Sahail</h1>
+    
+
+    <!-- rest of nav -->
+
+      <nav id="mainNav" class="nav" aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <button id="menuBtn" class="menu-btn" aria-expanded="false" aria-controls="mainNav">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero container" id="home">
+      
+      <div class="photo-wrap">
+        <!-- If this external image fails, JS will replace it with placeholder -->
+        <img id="profilePhoto" class="photo"
+             src="image 17.jpg"
+             alt="Profile photo">
+      </div>
+
+      <div class="hero-content">
+        <p class="eyebrow">Hi, I’m</p>
+        <h2 class="fullname">Mohammed Sahail</h2>
+        <p class="tagline">ECE Student • Frontend Learner • Embedded Hobbyist</p>
+
+        <div class="lang-list">
+          <strong>Languages / Tech:</strong>
+          <ul>
+            <li>HTML • CSS </li>
+            <li>Python • MicroPython</li>
+            <li>C / C++ (Embedded)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="about container">
+      <h3>About</h3>
+      <p>
+I’m Mohammed Sahail, an Electronics & Communication Engineering student passionate about web development and embedded systems. I enjoy designing simple, modern interfaces and experimenting with microcontrollers, circuits, and IoT concepts.
+My interest lies in learning new technologies and building projects that help me grow step-by-step in both software and electronics.
+      </p>
+    </section>
+
+    <section id="projects" class="projects container">
+      <h3>Projects</h3>
+      <div class="projects-grid">
+        <article class="card">
+          <h4>Health Monitor (Prototype)</h4>
+          <p>ESP32 + MicroPython heart-rate & temperature monitor with a simple web dashboard.</p>
+          <p class="meta">HTML • CSS • Javascript</p>
+          <a class="btn" href="#contact">Discuss</a>
+        </article>
+
+        <article class="card">
+          <h4>Mind1Verse-welness tracker</h4>
+          <p>MindVerse is a simple wellness tracker with clean UI and optional hardware support
+    using ESP32 for collecting basic mood or habit data.</p>
+          <p class="meta">HTML • CSS • C/C++ • MicroPython</p>
+          <a class="btn" href="#contact">View</a>
+        </article>
+
+        <article class="card">
+          <h4>Circuit Visualizer</h4>
+          <p>Small web tool to draw and simulate basic circuit connections for learning.</p>
+          <p class="meta">JavaScript • SVG</p>
+          <a class="btn" href="#contact">Source</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" class="contact container">
+      <h3>Contact</h3>
+      <ul class="contact-list">
+        <li><strong>Email:</strong> 
+  <a href="mailto:sahailmohammed786@gmail.com" 
+     style="color:#0073e6; font-weight:600; text-decoration:none;">
+     sahailmohammed786@gmail.com
+  </a>
+</li>
+
+        <li><strong>WhatsApp:</strong> <a href="https://wa.me/917892295098" target="_blank" rel="noopener">+91 7892295098</a></li>
+        <li><strong>Location:</strong> Bangalore, India</li>
+      </ul>
+      
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    © <span id="year"></span> Mohammed Sahail
+  </footer>
+
+  <script>
+    // DOM-safe startup
+    document.addEventListener('DOMContentLoaded', function () {
+      // set year
+      const y = document.getElementById('year');
+      if (y) y.textContent = new Date().getFullYear();
+
+      // menu toggle
+      const menuBtn = document.getElementById('menuBtn');
+      const nav = document.getElementById('mainNav');
+      if (menuBtn && nav) {
+        menuBtn.addEventListener('click', function () {
+          const currently = window.getComputedStyle(nav).display;
+          if (currently === 'none' || currently === '') {
+            nav.style.display = 'flex';
+            nav.style.flexDirection = 'column';
+            nav.style.position = 'absolute';
+            nav.style.right = '20px';
+            nav.style.top = '62px';
+            nav.style.padding = '10px';
+            nav.style.borderRadius = '10px';
+            nav.style.background = 'rgba(0,0,0,0.4)';
+            menuBtn.setAttribute('aria-expanded', 'true');
+          } else {
+            nav.style.display = 'none';
+            menuBtn.setAttribute('aria-expanded', 'false');
+          }
+        });
+
+        // responsive initial state
+        function checkWidth() {
+          if (window.innerWidth > 880) {
+            nav.style.display = 'flex';
+            nav.style.position = '';
+            nav.style.flexDirection = '';
+            nav.style.background = '';
+          } else {
+            nav.style.display = 'none';
+          }
+        }
+        window.addEventListener('resize', checkWidth);
+        checkWidth();
+      }
+
+      // image fallback
+      const photo = document.getElementById('profilePhoto');
+      if (photo) {
+        photo.addEventListener('error', function () {
+          photo.src = 'https://via.placeholder.com/400x400?text=Profile';
+        });
+      }
+
+      // Debug message checks (helps figuring out linking issues)
+      const debug = document.getElementById('debugMsg');
+      let msg = 'Status: JS loaded ✓ — styles are inline so styling should appear.';
+
+      // quick runtime checks
+      try {
+        const bg = getComputedStyle(document.body).backgroundImage;
+        msg += ' Computed body background: ' + (bg ? 'found' : 'none');
+      } catch (e) {
+        msg += ' (could not read computed styles)';
+      }
+      if (debug) debug.textContent = msg;
+    });
+  </script>
+</body>
+</html>
+<script>
+<footer>...</footer>
+
